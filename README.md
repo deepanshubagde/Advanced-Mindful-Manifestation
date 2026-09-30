@@ -40,6 +40,8 @@ Built with **HTML5**, **Tailwind CSS**, and **Vite**, fully optimized for mobile
 ├── index.html                  # Main responsive landing page
 ├── vite.config.ts              # Modern Vite configuration (ESM dirname)
 ├── package.json                # Project scripts and dependencies
+├── package-lock.json           # Locked dependency tree (0 peer conflicts)
+├── .npmrc                      # Configures legacy-peer-deps=true for Cloudflare Pages
 ├── tsconfig.json               # TypeScript configuration
 ├── wrangler.toml               # Cloudflare Pages / Workers configuration
 └── .gitignore                  # Git ignore rules for production
