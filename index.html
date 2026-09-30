@@ -178,119 +178,16 @@
               id="hero-banner-container" 
               class="relative w-full aspect-[16/9] rounded-xl sm:rounded-2xl overflow-hidden border-2 border-amber-500/60 shadow-zen-lg bg-stone-950 flex items-center justify-center transition-all duration-300 select-none"
             >
-              <!-- 1. The Real 16:9 Banner Image -->
+              <!-- 16:9 Official Workshop Banner Image (Locked & Static) -->
               <img 
                 id="hero-banner-image" 
                 src="/hero-banner.png" 
-                alt="5 Days Advanced Mindful Manifestation Workshop Banner (16:9 PPT Size)" 
-                class="w-full h-full object-cover select-none transition-opacity duration-300"
-                onload="if (this.naturalWidth > 10 && this.naturalHeight > 10) { this.classList.remove('hidden'); document.getElementById('hero-banner-default')?.classList.add('hidden'); } else { this.classList.add('hidden'); document.getElementById('hero-banner-default')?.classList.remove('hidden'); }"
-                onerror="if (this.src.indexOf('hero-banner.jpg') === -1) { this.src = '/hero-banner.jpg'; } else if (this.src.indexOf('5-days-m2m') === -1) { this.src = '/5-days-m2m.png'; } else { this.classList.add('hidden'); document.getElementById('hero-banner-default')?.classList.remove('hidden'); }"
+                alt="5 Days Advanced Mindful Manifestation Workshop Banner" 
+                class="w-full h-full object-cover select-none pointer-events-none"
+                loading="eager"
+                decoding="async"
               />
-
-              <!-- 2. Fallback / Default 16:9 Content (Shown when no custom image is loaded) -->
-              <div 
-                id="hero-banner-default" 
-                class="w-full h-full relative flex flex-col justify-between p-4 sm:p-6 md:p-8 bg-gradient-to-r from-[#FF7A00] via-[#F25A00] to-[#E04600] text-stone-900 overflow-hidden"
-              >
-                <!-- Spiritual Aura Glows -->
-                <div class="absolute -right-16 -top-16 w-80 h-80 rounded-full bg-amber-300/35 blur-3xl pointer-events-none"></div>
-                <div class="absolute right-1/4 top-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-yellow-400/25 blur-2xl pointer-events-none"></div>
-                <div class="absolute -left-10 -bottom-10 w-60 h-60 rounded-full bg-orange-700/30 blur-2xl pointer-events-none"></div>
-
-                <!-- Top Row: Brand & Live Badges -->
-                <div class="flex items-center justify-between gap-2 z-20">
-                  <div class="inline-flex items-center gap-1.5 sm:gap-2.5 bg-black/40 backdrop-blur-md px-2.5 sm:px-4 py-1 sm:py-1.5 rounded-full border border-white/20 shadow-sm">
-                    <div class="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-amber-400 flex items-center justify-center text-stone-950 font-bold text-xs shadow-xs">☸</div>
-                    <div class="flex flex-col">
-                      <span class="text-white font-black tracking-wide text-[10px] sm:text-xs md:text-sm uppercase leading-tight">MINDFUL TO MANIFEST</span>
-                      <span class="text-amber-200 text-[8px] sm:text-[9.5px] font-medium leading-none">Buddhist Secret to Abundance Life</span>
-                    </div>
-                  </div>
-
-                  <div class="flex items-center gap-1.5 sm:gap-2">
-                    <div class="inline-flex items-center gap-1 bg-white/95 px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full shadow-sm">
-                      <span class="w-2 h-2 rounded-full bg-red-600 animate-pulse"></span>
-                      <span class="text-red-600 font-black text-[9px] sm:text-[11px] tracking-wider">LIVE</span>
-                    </div>
-                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-full border-2 border-amber-300 bg-black/40 backdrop-blur-xs flex items-center justify-center text-amber-300 font-serif font-bold text-[10px] sm:text-xs shadow-sm">
-                      RD
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Main Body (Two Columns) in 16:9 Presentation Layout -->
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-4 items-center my-auto z-20">
-                  <!-- Left Col -->
-                  <div class="md:col-span-7 flex flex-col items-start space-y-2 sm:space-y-2.5">
-                    <div class="inline-block bg-[#00E599] text-stone-950 font-black text-xs sm:text-base md:text-lg px-3 sm:px-5 py-0.5 sm:py-1 rounded-lg shadow-md tracking-wider transform -rotate-1">
-                      5 DAYS
-                    </div>
-                    <div class="inline-block bg-white/95 text-[#D84315] font-black text-[10px] sm:text-xs md:text-sm px-3 sm:px-3.5 py-0.5 rounded-full shadow-md uppercase tracking-wide border border-orange-200">
-                      ADVANCE MANIFESTATION WORKSHOP
-                    </div>
-                    <div class="space-y-0.5 sm:space-y-1">
-                      <h3 class="text-white font-black text-sm sm:text-lg md:text-xl leading-tight drop-shadow-md">
-                        THE BUDDHIST SECRET FOR ABUNDANCE LIFE
-                      </h3>
-                      <p class="text-amber-100 font-bold text-[10px] sm:text-xs leading-snug">
-                        LEARN TO HEAL YOUR PAST & MANIFEST THE LIFE OF YOUR DREAMS
-                      </p>
-                    </div>
-
-                    <!-- Device Suite Access Mockup (Laptop, Tablet, Mobile) -->
-                    <div class="pt-1 flex items-center gap-2">
-                      <div class="bg-black/35 backdrop-blur-sm border border-white/25 rounded-xl px-3 py-1.5 flex items-center gap-2.5 text-white shadow-inner">
-                        <span class="text-base sm:text-lg">💻</span>
-                        <span class="text-base sm:text-lg">📱</span>
-                        <div class="text-left">
-                          <p class="text-[9.5px] sm:text-[10.5px] font-bold text-amber-200">Complete Live Workshop & App Suite</p>
-                          <p class="text-[8px] sm:text-[9px] text-white/80">Stream on Any Smartphone, Laptop, or Tablet</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <!-- Right Col: Buddha Vector -->
-                  <div class="md:col-span-5 relative hidden sm:flex items-center justify-center md:justify-end">
-                    <div class="relative w-40 sm:w-48 md:w-56 h-40 sm:h-48 md:h-56 flex items-center justify-center">
-                      <div class="absolute inset-0 rounded-full border border-yellow-300/40 animate-ping opacity-25"></div>
-                      <div class="absolute inset-2 rounded-full bg-gradient-to-tr from-yellow-500/40 via-amber-300/50 to-yellow-100/60 blur-md"></div>
-                      <svg viewBox="0 0 200 200" class="w-full h-full drop-shadow-[0_8px_16px_rgba(0,0,0,0.5)] z-10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="100" cy="70" r="45" fill="url(#haloGrad169)" opacity="0.9"/>
-                        <circle cx="100" cy="70" r="38" stroke="#FDE047" stroke-width="1.5" stroke-dasharray="3 3"/>
-                        <path d="M40 170 C60 155, 80 180, 100 165 C120 180, 140 155, 160 170 C145 185, 125 185, 100 185 C75 185, 55 185, 40 170 Z" fill="#D97706" stroke="#FEF08A" stroke-width="1"/>
-                        <path d="M55 165 C70 150, 85 170, 100 160 C115 170, 130 150, 145 165 C135 175, 115 175, 100 175 C85 175, 65 175, 55 165 Z" fill="#F59E0B"/>
-                        <path d="M60 160 C55 140, 70 120, 85 110 L115 110 C130 120, 145 140, 140 160 C125 165, 75 165, 60 160 Z" fill="#FBBF24" stroke="#F59E0B" stroke-width="1"/>
-                        <path d="M72 110 C72 95, 85 88, 100 88 C115 88, 128 95, 128 110 C128 128, 72 128, 72 110 Z" fill="#FCD34D"/>
-                        <ellipse cx="100" cy="148" rx="16" ry="6" fill="#FDE047" stroke="#D97706" stroke-width="0.75"/>
-                        <circle cx="100" cy="72" r="16" fill="#FDE047" stroke="#D97706" stroke-width="0.75"/>
-                        <circle cx="100" cy="54" r="5" fill="#F59E0B"/>
-                        <path d="M83 68 C81 72, 81 76, 83 78" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M117 68 C119 72, 119 76, 117 78" stroke="#D97706" stroke-width="1.5" stroke-linecap="round"/>
-                        <defs>
-                          <radialGradient id="haloGrad169" cx="0.5" cy="0.5" r="0.5" fx="0.5" fy="0.5">
-                            <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.95"/>
-                            <stop offset="60%" stop-color="#F59E0B" stop-opacity="0.6"/>
-                            <stop offset="100%" stop-color="#D97706" stop-opacity="0"/>
-                          </radialGradient>
-                        </defs>
-                      </svg>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Bottom Ticker -->
-                <div class="border-t border-white/20 pt-1.5 flex items-center justify-between text-[8px] sm:text-[10px] text-amber-100 font-semibold z-20">
-                  <span class="flex items-center gap-1">✨ 5 Days Live Workshop</span>
-                  <span class="hidden sm:inline">•</span>
-                  <span class="flex items-center gap-1">🧘 Guided Mindful Meditations</span>
-                  <span class="hidden sm:inline">•</span>
-                  <span class="flex items-center gap-1 font-bold text-white bg-black/30 px-2 py-0.5 rounded-full">🔥 ₹999 Limited Time Offer</span>
-                </div>
-              </div>
             </div>
-            <input type="file" id="hero-banner-quick-input" accept="image/*" class="hidden" />
           </div>
 
           <p class="text-[10px] sm:text-[11px] text-monk-muted mt-2 sm:mt-2.5 text-center font-medium">☸️ 5 Days Live Workshop with Rahul Dongre • Complete App Access Included</p>
@@ -1006,86 +903,6 @@
     setTimeout(() => {
       if (seatsEl) seatsEl.textContent = "12 Spots Left";
     }, 45000);
-
-    // 5. 16:9 Hero Banner Display & Drop Support
-    const heroBannerImg = document.getElementById('hero-banner-image');
-    const heroBannerDefault = document.getElementById('hero-banner-default');
-    const heroBannerContainer = document.getElementById('hero-banner-container');
-
-    function displayBanner(dataUrl) {
-      if (!dataUrl || !heroBannerImg) return;
-      heroBannerImg.src = dataUrl;
-      heroBannerImg.classList.remove('hidden');
-      if (heroBannerDefault) heroBannerDefault.classList.add('hidden');
-    }
-
-    try {
-      const saved169Banner = localStorage.getItem('monkhood_custom_banner_16_9');
-      if (saved169Banner && saved169Banner.length > 500) {
-        displayBanner(saved169Banner);
-        // Automatically sync to server disk so it is saved in public/hero-banner.png for Git
-        fetch('/api/upload-banner', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ image: saved169Banner })
-        }).catch(() => {});
-      }
-    } catch (e) {}
-
-    // Allow dragging & dropping or double-clicking image directly onto banner on any domain
-    const bannerQuickInput = document.getElementById('hero-banner-quick-input');
-
-    if (heroBannerContainer) {
-      ['dragenter', 'dragover'].forEach(name => {
-        heroBannerContainer.addEventListener(name, (e) => {
-          e.preventDefault();
-          heroBannerContainer.classList.add('ring-4', 'ring-amber-400');
-        });
-      });
-
-      ['dragleave', 'drop'].forEach(name => {
-        heroBannerContainer.addEventListener(name, (e) => {
-          e.preventDefault();
-          heroBannerContainer.classList.remove('ring-4', 'ring-amber-400');
-        });
-      });
-
-      function handleBannerFile(file) {
-        if (!file || !file.type.startsWith('image/')) return;
-        const reader = new FileReader();
-        reader.onload = (evt) => {
-          displayBanner(evt.target.result);
-          try {
-            localStorage.setItem('monkhood_custom_banner_16_9', evt.target.result);
-          } catch (err) {}
-          // Also sync to server so it saves to disk for Git
-          fetch('/api/upload-banner', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ image: evt.target.result })
-          }).catch(() => {});
-        };
-        reader.readAsDataURL(file);
-      }
-
-      heroBannerContainer.addEventListener('drop', (e) => {
-        e.preventDefault();
-        const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-        handleBannerFile(file);
-      });
-
-      // Double-click banner to open file picker directly
-      heroBannerContainer.addEventListener('dblclick', () => {
-        if (bannerQuickInput) bannerQuickInput.click();
-      });
-
-      if (bannerQuickInput) {
-        bannerQuickInput.addEventListener('change', (e) => {
-          const file = e.target.files && e.target.files[0];
-          handleBannerFile(file);
-        });
-      }
-    }
   </script>
 
 </body>
