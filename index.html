@@ -178,12 +178,14 @@
               id="hero-banner-container" 
               class="relative w-full aspect-[16/9] rounded-xl sm:rounded-2xl overflow-hidden border-2 border-amber-500/60 shadow-zen-lg bg-stone-950 flex items-center justify-center transition-all duration-300 select-none"
             >
-              <!-- 1. The Real Uploaded 16:9 Image -->
+              <!-- 1. The Real 16:9 Banner Image -->
               <img 
                 id="hero-banner-image" 
-                src="" 
+                src="/hero-banner.png" 
                 alt="5 Days Advanced Mindful Manifestation Workshop Banner (16:9 PPT Size)" 
-                class="w-full h-full object-cover hidden transition-opacity duration-300"
+                class="w-full h-full object-cover select-none transition-opacity duration-300"
+                onload="if (this.naturalWidth > 10 && this.naturalHeight > 10) { this.classList.remove('hidden'); document.getElementById('hero-banner-default')?.classList.add('hidden'); } else { this.classList.add('hidden'); document.getElementById('hero-banner-default')?.classList.remove('hidden'); }"
+                onerror="if (this.src.indexOf('hero-banner.jpg') === -1) { this.src = '/hero-banner.jpg'; } else if (this.src.indexOf('5-days-m2m') === -1) { this.src = '/5-days-m2m.png'; } else { this.classList.add('hidden'); document.getElementById('hero-banner-default')?.classList.remove('hidden'); }"
               />
 
               <!-- 2. Fallback / Default 16:9 Content (Shown when no custom image is loaded) -->
@@ -1004,9 +1006,10 @@
       if (seatsEl) seatsEl.textContent = "12 Spots Left";
     }, 45000);
 
-    // 5. 16:9 Hero Banner Display Logic
+    // 5. 16:9 Hero Banner Display & Drop Support
     const heroBannerImg = document.getElementById('hero-banner-image');
     const heroBannerDefault = document.getElementById('hero-banner-default');
+    const heroBannerContainer = document.getElementById('hero-banner-container');
 
     function displayBanner(dataUrl) {
       if (!dataUrl || !heroBannerImg) return;
@@ -1021,6 +1024,27 @@
         displayBanner(saved169Banner);
       }
     } catch (e) {}
+
+    // Allow dragging and dropping image directly onto banner on any domain
+    if (heroBannerContainer) {
+      ['dragenter', 'dragover'].forEach(name => {
+        heroBannerContainer.addEventListener(name, (e) => { e.preventDefault(); });
+      });
+      heroBannerContainer.addEventListener('drop', (e) => {
+        e.preventDefault();
+        const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        if (file && file.type.startsWith('image/')) {
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            displayBanner(evt.target.result);
+            try {
+              localStorage.setItem('monkhood_custom_banner_16_9', evt.target.result);
+            } catch (err) {}
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
   </script>
 
 </body>
