@@ -8,6 +8,49 @@ function mentorUploadPlugin(): Plugin {
   return {
     name: 'mentor-upload-endpoint',
     configureServer(server) {
+      server.middlewares.use('/api/upload-banner', (req, res) => {
+        if (req.method === 'POST') {
+          const chunks: Buffer[] = [];
+          req.on('data', chunk => chunks.push(Buffer.from(chunk)));
+          req.on('end', () => {
+            try {
+              const fullBuffer = Buffer.concat(chunks);
+              let fileBuffer = fullBuffer;
+              const text = fullBuffer.toString('utf-8', 0, Math.min(fullBuffer.length, 100));
+              if (text.trim().startsWith('{')) {
+                const json = JSON.parse(fullBuffer.toString('utf-8'));
+                if (json.image) {
+                  const base64Data = json.image.replace(/^data:image\/\w+;base64,/, '');
+                  fileBuffer = Buffer.from(base64Data, 'base64');
+                }
+              }
+
+              const targets = [
+                path.resolve(rootDir, 'public/hero-banner.png'),
+                path.resolve(rootDir, 'public/hero-banner.jpg'),
+                path.resolve(rootDir, 'hero-banner.png'),
+                path.resolve(rootDir, 'public/5 Days M2M.png'),
+                path.resolve(rootDir, '5 Days M2M.png'),
+              ];
+
+              for (const target of targets) {
+                fs.writeFileSync(target, fileBuffer);
+              }
+
+              res.setHeader('Content-Type', 'application/json');
+              res.statusCode = 200;
+              res.end(JSON.stringify({ success: true, message: '16:9 Banner saved to disk' }));
+            } catch (err: any) {
+              res.statusCode = 500;
+              res.end(JSON.stringify({ error: err.message }));
+            }
+          });
+          return;
+        }
+        res.statusCode = 405;
+        res.end();
+      });
+
       server.middlewares.use('/api/upload-mentor', (req, res) => {
         if (req.method === 'POST') {
           const chunks: Buffer[] = [];
