@@ -1,0 +1,6 @@
+{
+  "name": "Monkhood - 5 Days Mindful Manifestation",
+  "description": "5 Days Advanced Mindful Manifestation Workshop based on the Buddha way of mindfulness, meditation, and manifestation by Rahul Dongre.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
