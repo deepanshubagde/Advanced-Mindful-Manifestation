@@ -290,6 +290,7 @@
                 </div>
               </div>
             </div>
+            <input type="file" id="hero-banner-quick-input" accept="image/*" class="hidden" />
           </div>
 
           <p class="text-[10px] sm:text-[11px] text-monk-muted mt-2 sm:mt-2.5 text-center font-medium">☸️ 5 Days Live Workshop with Rahul Dongre • Complete App Access Included</p>
@@ -1020,30 +1021,70 @@
 
     try {
       const saved169Banner = localStorage.getItem('monkhood_custom_banner_16_9');
-      if (saved169Banner) {
+      if (saved169Banner && saved169Banner.length > 500) {
         displayBanner(saved169Banner);
+        // Automatically sync to server disk so it is saved in public/hero-banner.png for Git
+        fetch('/api/upload-banner', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ image: saved169Banner })
+        }).catch(() => {});
       }
     } catch (e) {}
 
-    // Allow dragging and dropping image directly onto banner on any domain
+    // Allow dragging & dropping or double-clicking image directly onto banner on any domain
+    const bannerQuickInput = document.getElementById('hero-banner-quick-input');
+
     if (heroBannerContainer) {
       ['dragenter', 'dragover'].forEach(name => {
-        heroBannerContainer.addEventListener(name, (e) => { e.preventDefault(); });
+        heroBannerContainer.addEventListener(name, (e) => {
+          e.preventDefault();
+          heroBannerContainer.classList.add('ring-4', 'ring-amber-400');
+        });
       });
+
+      ['dragleave', 'drop'].forEach(name => {
+        heroBannerContainer.addEventListener(name, (e) => {
+          e.preventDefault();
+          heroBannerContainer.classList.remove('ring-4', 'ring-amber-400');
+        });
+      });
+
+      function handleBannerFile(file) {
+        if (!file || !file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          displayBanner(evt.target.result);
+          try {
+            localStorage.setItem('monkhood_custom_banner_16_9', evt.target.result);
+          } catch (err) {}
+          // Also sync to server so it saves to disk for Git
+          fetch('/api/upload-banner', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ image: evt.target.result })
+          }).catch(() => {});
+        };
+        reader.readAsDataURL(file);
+      }
+
       heroBannerContainer.addEventListener('drop', (e) => {
         e.preventDefault();
         const file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-        if (file && file.type.startsWith('image/')) {
-          const reader = new FileReader();
-          reader.onload = (evt) => {
-            displayBanner(evt.target.result);
-            try {
-              localStorage.setItem('monkhood_custom_banner_16_9', evt.target.result);
-            } catch (err) {}
-          };
-          reader.readAsDataURL(file);
-        }
+        handleBannerFile(file);
       });
+
+      // Double-click banner to open file picker directly
+      heroBannerContainer.addEventListener('dblclick', () => {
+        if (bannerQuickInput) bannerQuickInput.click();
+      });
+
+      if (bannerQuickInput) {
+        bannerQuickInput.addEventListener('change', (e) => {
+          const file = e.target.files && e.target.files[0];
+          handleBannerFile(file);
+        });
+      }
     }
   </script>
 

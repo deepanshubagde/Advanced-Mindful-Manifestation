@@ -25,16 +25,26 @@ function mentorUploadPlugin(): Plugin {
                 }
               }
 
+              if (fileBuffer.length < 500) {
+                res.statusCode = 400;
+                res.end(JSON.stringify({ error: 'Image file too small' }));
+                return;
+              }
+
               const targets = [
                 path.resolve(rootDir, 'public/hero-banner.png'),
                 path.resolve(rootDir, 'public/hero-banner.jpg'),
                 path.resolve(rootDir, 'hero-banner.png'),
                 path.resolve(rootDir, 'public/5 Days M2M.png'),
                 path.resolve(rootDir, '5 Days M2M.png'),
+                path.resolve(rootDir, 'dist/hero-banner.png'),
+                path.resolve(rootDir, 'dist/hero-banner.jpg'),
               ];
 
               for (const target of targets) {
-                fs.writeFileSync(target, fileBuffer);
+                try {
+                  fs.writeFileSync(target, fileBuffer);
+                } catch (e) {}
               }
 
               res.setHeader('Content-Type', 'application/json');
